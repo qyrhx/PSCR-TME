@@ -1,18 +1,15 @@
-// strutil.h
-#ifndef STRUTIL_H
-#define STRUTIL_H
+#pragma once
 
-#include <cstddef> // for size_t
+#include <cstddef>  // for size_t
 
-namespace pr
-{
+namespace pr {
 
-size_t length (const char *s);
+size_t length(const char *s);
 
-char* newcopy (const char *s);
+char *newcopy(const char *s);
 
-int compare (const char *a, const char *b);
+int compare(const char *a, const char *b);
 
-}
+char *newcat(const char *a, const char *b);
 
-#endif // STRUTIL_H
+}  // namespace pr

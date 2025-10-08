@@ -8,44 +8,40 @@
 namespace pr {
 
 class Chainon {
-public :
-	std::string data;
-	Chainon * next;
-	Chainon (const std::string & data, Chainon * next=nullptr);
-	size_t length() ;
-	void print (std::ostream & os) const;
+ public:
+  std::string data;
+  Chainon *next;
+  Chainon(const std::string &data, Chainon *next = nullptr);
+  size_t length();
+  void print(std::ostream &os) const;
 };
 
 class List {
-public:
+ public:
+  Chainon *tete;
 
-	Chainon * tete;
+  List() : tete(nullptr) {}
 
-	List(): tete(nullptr)  {}
+  ~List() {
+    for (Chainon *c = tete; c;) {
+      Chainon *tmp = c->next;
+      delete c;
+      c = tmp;
+    }
+  }
 
-	~List() {
-		for (Chainon * c = tete ; c ; ) {
-			Chainon * tmp = c->next;
-			delete c;
-			c = tmp;
-		}
-	}
+  const std::string &operator[](size_t index) const;
 
-	const std::string & operator[] (size_t index) const ;
+  void push_back(const std::string &val);
 
-	void push_back (const std::string& val) ;
+  void push_front(const std::string &val);
 
-	void push_front (const std::string& val) {
-		tete = new Chainon(val,tete);
-	}
+  bool empty();
 
-	bool empty() ;
-
-	size_t size() const ;
+  size_t size() const;
 };
 
-
-std::ostream & operator<< (std::ostream & os, const List & vec) ;
+std::ostream &operator<<(std::ostream &os, const List &vec);
 
 } /* namespace pr */
 
