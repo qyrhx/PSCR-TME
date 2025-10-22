@@ -31,19 +31,29 @@ Total time 9335ms.
 ### Question 3
 Implemented `void renderThreadPerPixel(const Scene& scene, Image& img)` in Renderer.
 
-mesures
-
+Mesures:
+```
+Ca plante
+```
 
 ### Question 4
 Implemented `void renderThreadPerRow(const Scene& scene, Image& img)` in Renderer.
 
-mesures
+Mesures:
+```
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode ThreadPerRow
+Total time 5410ms.
+```
 
 
 ### Question 5
 Implemented `void renderThreadManual(const Scene& scene, Image& img, int nbthread)` in Renderer.
 
-mesures
+Mesures:
+```
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode ThreadManual, threads 4
+Total time 5159ms.
+```
 
 
 ## With Thread Pool
