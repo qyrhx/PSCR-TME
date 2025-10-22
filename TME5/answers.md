@@ -11,9 +11,20 @@ Configured project with CMake as previous TMEs. No dependencies, all handmade.
 
 Ran `build/TME5` and generated `spheres.bmp`.
 
-Platform: 
+Platform:
+```
+Void Linux
+CPU: dual core Intel Celeron N4000, speed/min/max: 1710/800/2600 MHz
+Kernel: 6.12.49_1 x86_64
+Mem: 8GB
+Storage: SSD
+```
 
 Temps/baseline choisi :
+```
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode sequential
+Total time 9335ms.
+```
 
 ## With Manual Threads
 
@@ -47,7 +58,7 @@ Job abstract class with virtual run().
 ### Question 8
 PixelJob: derives from Job, captures ?TODO?
 
-renderPoolPixel: 
+renderPoolPixel:
 
 Mode "-m PoolPixel" with -n.
 
@@ -56,7 +67,7 @@ mesures
 ### Question 9
 LineJob: derives from Job, captures TODO
 
-renderPoolRow: 
+renderPoolRow:
 
 Mode "-m PoolRow -n nbthread".
 
