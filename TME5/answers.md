@@ -136,4 +136,20 @@ Pour *PoolPixel* 8 threads, pour *PoolRow* aussi 8 threads, en general *PoolRow*
 
 ### Question 11
 
-pool supportant soumission de lambda
+Pool supportant soumission de lambda
+
+Mesures:
+```
+λ> ./TME5 -m PoolFunctionalRow -n 8
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolFunctionalRow
+Total time 5430ms.
+
+λ> ./TME5 -m PoolFunctionalRow -n 12
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolFunctionalRow
+Total time 5344ms.
+
+
+λ> ./TME5 -m PoolFunctionalRow -n 16
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolFunctionalRow
+Total time 5362ms.
+```

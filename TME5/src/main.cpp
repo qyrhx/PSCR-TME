@@ -68,10 +68,8 @@ int main(int argc, char *argv[]) {
     renderer.renderPoolPixel(scene, img, opts.nbthread);
   } else if (opts.mode == "PoolRow") {
     renderer.renderPoolRow(scene, img, opts.nbthread);
-    /*
-      } else if (opts.mode == "PoolFunctionalRow") {
-      renderer.renderPoolFunctionalRow(scene, img, opts.nbthread);
-    */
+  } else if (opts.mode == "PoolFunctionalRow") {
+    renderer.renderPoolFunctionalRow(scene, img, opts.nbthread);
   } else {
     std::cerr << "Unknown mode: " << opts.mode << std::endl;
     return 1;

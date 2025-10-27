@@ -12,7 +12,7 @@ class LineJob : public Job {
  public:
   LineJob(const Scene &scene_, Image &img_, int x_) : scene{scene_}, img{img_}, x{x_} {}
 
-  void run() {
+  void operator()() {
     for (int y = 0; y < scene.getWidth(); ++y) {
       auto &screenPoint = scene.getScreenPoints()[y][x];
       Ray ray(scene.getCameraPos(), screenPoint);

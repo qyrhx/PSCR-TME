@@ -15,7 +15,7 @@ class PixelJob : public Job {
   PixelJob(const Scene &scene_, Image &img_, int x_, int y_)
       : scene{scene_}, img{img_}, x{x_}, y{y_} {}
 
-  void run() {
+  void operator()() {
     auto &screenPoint = scene.getScreenPoints()[y][x];
 
     Ray ray(scene.getCameraPos(), screenPoint);

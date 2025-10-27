@@ -2,13 +2,16 @@
 
 #include <vector>
 #include <thread>
+#include <functional>
 #include "Queue.h"
 #include "Job.h"
 
 namespace pr {
 
+using Callback = std::function<void()>;
+
 class Pool {
-  Queue<Job> queue;
+  Queue<Callback> queue;
   std::vector<std::thread> threads;
 
  public:
@@ -25,7 +28,7 @@ class Pool {
 
   // submit a job to be executed by the pool,
   // call new, and memory is freed by the worker
-  void submit(Job *job) { queue.push(job); }
+  void submit(Callback *f) { queue.push(f); }
 
   // initiate shutdown, wait for threads to finish
   void stop() {
@@ -38,9 +41,10 @@ class Pool {
  private:
   // worker thread function
   void worker() {
-    for (Job *j = queue.pop(); j; j = queue.pop()) {
-      j->run();
-      delete j;  // new is made when calling submit()
+    for (Callback *f = queue.pop(); f; f = queue.pop()) {
+      auto fun = *f;
+      fun();
+      delete f;  // new is made when calling submit()
     }
   }
 };

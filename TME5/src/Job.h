@@ -4,7 +4,7 @@ namespace pr {
 
 class Job {
  public:
-  virtual void run() = 0;
+  virtual void operator()() = 0;
   virtual ~Job(){};
 };
 

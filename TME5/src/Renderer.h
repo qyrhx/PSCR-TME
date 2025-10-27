@@ -142,7 +142,7 @@ class Renderer {
     pool.start(nbthreads);
     for (int y = 0; y < scene.getHeight(); ++y) {
       for (int x = 0; x < scene.getWidth(); ++x) {
-        pool.submit(new PixelJob(scene, img, x, y));
+        pool.submit(new Callback{PixelJob(scene, img, x, y)});
       }
     }
     pool.stop();
@@ -152,10 +152,35 @@ class Renderer {
     Pool pool{100};
     pool.start(nbthreads);
     for (int x = 0; x < scene.getWidth(); ++x) {
-      pool.submit(new LineJob(scene, img, x));
+      pool.submit(new Callback{LineJob(scene, img, x)});
+    }
+    pool.stop();
+  }
+
+  void renderPoolFunctionalRow(const Scene &scene, Image &img, int nbthreads) {
+    Pool pool{100};
+    pool.start(nbthreads);
+    for (int y = 0; y < scene.getHeight(); ++y) {
+      auto fun = new Callback([&scene, &img, y] {
+        for (int x = 0; x < scene.getWidth(); ++x) {
+          auto &screenPoint = scene.getScreenPoints()[y][x];
+          Ray ray(scene.getCameraPos(), screenPoint);
+          int targetSphere = scene.findClosestInter(ray);
+
+          Color finalcolor = Color{255, 255, 255};
+          if (targetSphere == -1)
+            continue;  // keep background color
+
+          const Sphere &obj = scene.getObject(targetSphere);
+          // pixel prend la couleur de l'objet
+          finalcolor = scene.computeColor(obj, ray);
+          // mettre a jour la couleur du pixel dans l'image finale.
+          img.pixel(x, y) = finalcolor;
+        }
+      });
+      pool.submit(fun);
     }
     pool.stop();
   }
 };
-
 }  // namespace pr
