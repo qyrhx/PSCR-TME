@@ -66,28 +66,74 @@ Pool class: constructor with queue size, start, stop.
 Job abstract class with virtual run().
 
 ### Question 8
-PixelJob: derives from Job, captures ?TODO?
+PixelJob: derives from Job, captures
+```
+const Scene& scene;
+Image& img;
+int x, y;
+```
 
-renderPoolPixel:
+renderPoolPixel (capacite de Pool: 500):
+```
+λ> ./TME5 -m PoolPixel -n 6
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolPixel, threads 6
+Total time 9606ms.
 
-Mode "-m PoolPixel" with -n.
+λ> ./TME5 -m PoolPixel -n 8
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolPixel, threads 8
+Total time 8283ms.
 
-mesures
+λ> ./TME5 -m PoolPixel -n 10
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolPixel, threads 10
+Total time 10435ms.
+
+λ> ./TME5 -m PoolPixel -n 12
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolPixel, threads 12
+Total time 9736ms.
+
+λ> ./TME5 -m PoolPixel -n 16
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolPixel, threads 16
+Total time 21904ms.
+```
 
 ### Question 9
-LineJob: derives from Job, captures TODO
+LineJob: derives from Job, captures:
+```
+const Scene &scene;
+Image &img;
+int x;
+```
 
-renderPoolRow:
+renderPoolRow (capacite de Pool: 100)
+Mesures:
+```
+λ> ./TME5 -m PoolRow -n 4
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolRow, threads 4
+Total time 5844ms.
 
-Mode "-m PoolRow -n nbthread".
+λ> ./TME5 -m PoolRow -n 6
+Ray tracer starting with output 'spheres.bmp', resolution 2000x2000, spheres 250, mode PoolRow, threads 6
+Total time 5988ms.
 
-mesures
+λ> ./TME5 -m PoolRow -n 8 -o i.bmp
+Ray tracer starting with output 'i.bmp', resolution 2000x2000, spheres 250, mode PoolRow, threads 8
+Total time 5454ms.
+
+λ> ./TME5 -m PoolRow -n 16 -o i.bmp
+Ray tracer starting with output 'i.bmp', resolution 2000x2000, spheres 250, mode PoolRow, threads 16
+Total time 5859ms.
+
+```
 
 ### Question 10
 Best:
+
+*Note: Je n'ai que 2 coeurs sur ma machine*
+
+Pour *PoolPixel* 8 threads, pour *PoolRow* aussi 8 threads, en general *PoolRow* est mieux.
 
 ## Bonus
 
 ### Question 11
 
-pool supportant soumission de lambda.
+pool supportant soumission de lambda

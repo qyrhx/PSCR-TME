@@ -1,8 +1,9 @@
 #pragma once
 
+#include <condition_variable>
+#include <mutex>
 #include <cstdlib>
 #include <cstring>
-#include <mutex>
 
 namespace pr {
 
@@ -18,6 +19,9 @@ class Queue {
   size_t begin_;
   size_t size_;
   mutable std::mutex m_;
+  std::condition_variable cv_prod;
+  std::condition_variable cv_cons;
+  bool block;
 
   // fonctions private, sans protection mutex
   bool empty() const { return size_ == 0; }
@@ -25,7 +29,7 @@ class Queue {
   bool full() const { return size_ == allocsize_; }
 
  public:
-  Queue(size_t size = 10) : allocsize_(size), begin_(0), size_(0) {
+  Queue(size_t size = 10) : allocsize_(size), begin_(0), size_(0), block(true) {
     tab_ = new T *[size];
     // zero-initialize, not strictly necessary
     memset(tab_, 0, size * sizeof(T *));
@@ -36,26 +40,37 @@ class Queue {
     return size_;
   }
 
+  void setBlock(const bool b) { block = b; }
+
   T *pop() {
-    std::unique_lock<std::mutex> lg(m_);
-    if (empty()) {
-      return nullptr;
+    T *ret;
+    {  // C.S
+      std::unique_lock<std::mutex> lg(m_);
+      while (empty() && block)
+        cv_cons.wait(lg);  // Note: when we enter wait, it's a sort of a hole in C.S.
+      if (empty() && ! block)
+        return nullptr;
+      ret = tab_[begin_];
+      // cleanup, not strictly necessary
+      tab_[begin_] = nullptr;
+      size_--;
+      begin_ = (begin_ + 1) % allocsize_;
     }
-    auto ret = tab_[begin_];
-    // cleanup, not strictly necessary
-    tab_[begin_] = nullptr;
-    size_--;
-    begin_ = (begin_ + 1) % allocsize_;
+    cv_prod.notify_one();
     return ret;
   }
 
   bool push(T *elt) {
-    std::unique_lock<std::mutex> lg(m_);
-    if (full()) {
-      return false;
+    {  // C.S
+      std::unique_lock<std::mutex> lg(m_);
+      while (full() && block)
+        cv_prod.wait(lg);
+      if (full() && ! block)
+        return false;
+      tab_[(begin_ + size_) % allocsize_] = elt;
+      size_++;
     }
-    tab_[(begin_ + size_) % allocsize_] = elt;
-    size_++;
+    cv_cons.notify_one();
     return true;
   }
 

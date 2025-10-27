@@ -5,6 +5,9 @@
 #include "Scene.h"
 #include "Image.h"
 #include "Ray.h"
+#include "./Pool.h"
+#include "./PixelJob.h"
+#include "./LineJob.h"
 
 namespace pr {
 
@@ -102,14 +105,11 @@ class Renderer {
     slaves.reserve(nbthread);
 
     int offset = scene.getHeight() / nbthread;
-    std::cout << "Img rows: " << scene.getHeight() << ", offset: " << offset << '\n';
     for (int i = 0; i < nbthread; ++i) {
       int begin = i * offset;
       int end   = begin + offset;
-      if (i == nbthread-1)
+      if (i == nbthread - 1)  // last iter
         end = scene.getHeight();
-
-      std::cout << "Begin Index: " << begin << ", End: " << end << '\n';
 
       auto job = [&scene, &img, begin, end] {
         for (int y = begin; y < end; ++y) {
@@ -135,6 +135,26 @@ class Renderer {
 
     for (auto &slave : slaves)
       slave.join();
+  }
+
+  void renderPoolPixel(const Scene &scene, Image &img, int nbthreads) {
+    Pool pool{500};
+    pool.start(nbthreads);
+    for (int y = 0; y < scene.getHeight(); ++y) {
+      for (int x = 0; x < scene.getWidth(); ++x) {
+        pool.submit(new PixelJob(scene, img, x, y));
+      }
+    }
+    pool.stop();
+  }
+
+  void renderPoolRow(const Scene &scene, Image &img, int nbthreads) {
+    Pool pool{100};
+    pool.start(nbthreads);
+    for (int x = 0; x < scene.getWidth(); ++x) {
+      pool.submit(new LineJob(scene, img, x));
+    }
+    pool.stop();
   }
 };
 
