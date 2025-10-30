@@ -289,7 +289,7 @@ int main(int argc, char **argv) {
     for (const auto &p : um)
       pairs.emplace_back(p);
     pr::printResults(total_words, unique_words, pairs, mode + ".freq");
-  } else if (mode == "mt_hash_fine") {
+  } else if (mode == "mt_hfine") {
     size_t total_words  = 0;
     size_t unique_words = 0;
     HashMapFine<std::string, int> um{};
