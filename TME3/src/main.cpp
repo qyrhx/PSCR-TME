@@ -1,17 +1,17 @@
 #include <iostream>
 #include <fstream>
-#include <regex>
 #include <chrono>
 #include <thread>
 #include <string>
 #include <mutex>
 #include <atomic>
-#include <algorithm>
 #include <vector>
 #include <unordered_map>
 #include <ios>
 #include <cstdlib>
 #include "HashMap.h"
+#include "HashMapMT.h"
+#include "HashMapFine.h"
 #include "FileUtils.h"
 
 using namespace std;
@@ -193,35 +193,62 @@ int main(int argc, char **argv) {
     for (const auto &p : um)
       pairs.emplace_back(p);
     pr::printResults(total_words, unique_words, pairs, mode + ".freq");
-  } else if (mode == "mt_hashes") {
+  } else if (mode == "mt_hmutex") {
     size_t total_words  = 0;
     size_t unique_words = 0;
-    std::unordered_map<std::string, int> um;
+    HashMapMT<std::string, int> um;
 
     auto partitions = pr::partition(filename, file_size, num_threads);
     std::vector<std::thread> threads;
     threads.reserve(num_threads);
 
-    std::vector<std::unordered_map<std::string, int>> hashes;
-    hashes.reserve(num_threads);
-
     for (size_t i = 0; i < partitions.size() - 1; ++i) {
-      hashes.emplace_back();
       threads.emplace_back(
           pr::processRange, filename, partitions[i], partitions[i + 1],
-          [&, i](const std::string &word) {
-            hashes[i][word]++;
+          [&](const std::string &word) {
+            um.incrementFrequency(word);
           }
       );
     }
     for (auto &t : threads)
       t.join();
 
-    for (auto &h: hashes)
-      for (auto& [word, cnt] : h) {
+    auto kvs     = um.toKeyValuePairs();
+    unique_words = kvs.size();
+    pairs.reserve(unique_words);
+    for (const auto &p : kvs) {
+      total_words += p.second;
+      pairs.emplace_back(p);
+    }
+    pr::printResults(total_words, unique_words, pairs, mode + ".freq");
+  } else if (mode == "mt_hashes") {
+    size_t total_words  = 0;
+    size_t unique_words = 0;
+    // Main Hashtable
+    std::unordered_map<std::string, int> um;
+    auto partitions = pr::partition(filename, file_size, num_threads);
+    std::vector<std::thread> threads;
+    threads.reserve(num_threads);
+    // HashTable for each thread
+    std::vector<std::unordered_map<std::string, int>> hashes;
+    hashes.reserve(num_threads);
+    // launch threads
+    for (size_t i = 0; i < partitions.size() - 1; ++i) {
+      hashes.emplace_back();
+      threads.emplace_back(
+          pr::processRange, filename, partitions[i], partitions[i + 1],
+          [&, i](const std::string &word) { hashes[i][word]++; }
+      );
+    }
+    for (auto &t : threads)
+      t.join();
+    // Merge hashtables
+    for (auto &h : hashes) {
+      for (auto &[word, cnt] : h) {
         um[word] += cnt;
         total_words += cnt;
       }
+    }
 
     unique_words = um.size();
     pairs.reserve(unique_words);
@@ -244,24 +271,49 @@ int main(int argc, char **argv) {
       hashes.emplace_back();
       threads.emplace_back(
           pr::processRange, filename, partitions[i], partitions[i + 1],
-          [&, i](const std::string &word) {
-            hashes[i].incrementFrequency(word);
-          }
+          [&, i](const std::string &word) { hashes[i].incrementFrequency(word); }
       );
     }
     for (auto &t : threads)
       t.join();
 
-    for (auto &h: hashes)
-      for (auto& [word, cnt] : h.toKeyValuePairs()) {
+    for (auto &h : hashes) {
+      for (auto &[word, cnt] : h.toKeyValuePairs()) {
         um[word] += cnt;
         total_words += cnt;
       }
+    }
 
     unique_words = um.size();
     pairs.reserve(unique_words);
     for (const auto &p : um)
       pairs.emplace_back(p);
+    pr::printResults(total_words, unique_words, pairs, mode + ".freq");
+  } else if (mode == "mt_hash_fine") {
+    size_t total_words  = 0;
+    size_t unique_words = 0;
+    HashMapFine<std::string, int> um{};
+
+    auto partitions = pr::partition(filename, file_size, num_threads);
+    std::vector<std::thread> threads;
+    threads.reserve(num_threads);
+
+    for (size_t i = 0; i < partitions.size() - 1; ++i) {
+      threads.emplace_back(
+          pr::processRange, filename, partitions[i], partitions[i + 1],
+          [&](const std::string &word) { um.incrementFrequency(word); }
+      );
+    }
+    for (auto &t : threads)
+      t.join();
+
+    auto kvs     = um.toKeyValuePairs();
+    unique_words = kvs.size();
+    pairs.reserve(unique_words);
+    for (const auto &p : kvs) {
+      total_words += p.second;
+      pairs.emplace_back(p);
+    }
     pr::printResults(total_words, unique_words, pairs, mode + ".freq");
   } else {
     cerr << "Unknown mode '" << mode << "'. Supported modes: freqstd, freq, freqstdf" << endl;
