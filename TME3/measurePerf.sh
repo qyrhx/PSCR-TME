@@ -33,7 +33,7 @@ EXE="${2:-./build-release/TME3}"
 SINGLE_MODES=("freqstd" "freqstdf" "freq")
 
 # Modes that use num_threads, skipping naive ones
-MULTI_MODES=("partition" "mt_mutex" "mt_hmutex" "mt_hashes" "mt_hhashes" "mt_hfine" "mt_lf" "mt_lfna")
+MULTI_MODES=("partition" "mt_mutex" "mt_hmutex" "mt_hashes" "mt_hhashes" "mt_hfine" "mt_na" "mt_lfna")
 
 # Thread counts to test
 THREADS=(1 2 4 6 8 16 32 64)

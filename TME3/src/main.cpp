@@ -10,10 +10,11 @@
 #include <unordered_map>
 #include <ios>
 #include <cstdlib>
-#include "HashMap.h"
-#include "HashMapMT.h"
-#include "HashMapFine.h"
-#include "FileUtils.h"
+#include "./HashMap.h"
+#include "./HashMapMT.h"
+#include "./HashMapFine.h"
+#include "./FileUtils.h"
+#include "./HashMapLF.h"
 
 using namespace std;
 
@@ -362,6 +363,34 @@ int main(int argc, char **argv) {
     for (const auto &p : um)
       pairs.emplace_back(p);
     pr::printResults(total_words, unique_words, pairs, mode + ".freq");
+  } else if (mode == "mt_lfna") {
+    atomic_size_t total_words  = 0;
+    size_t unique_words = 0;
+    HashMapLF<std::string, int> um;
+
+    auto partitions = pr::partition(filename, file_size, num_threads);
+    std::vector<std::thread> threads;
+    threads.reserve(num_threads);
+
+    for (size_t i = 0; i < partitions.size() - 1; ++i) {
+      threads.emplace_back(
+          pr::processRange, filename, partitions[i], partitions[i + 1],
+          [&](const std::string &word) {
+            total_words++;
+            um.incrementFrequency(word);
+          }
+      );
+    }
+    for (auto &t : threads)
+      t.join();
+
+    auto kvs = um.toKeyValuePairs();
+    unique_words = kvs.size();
+    pairs.reserve(unique_words);
+    for (const auto &p : kvs)
+      pairs.emplace_back(p);
+    pr::printResults(total_words, unique_words, pairs, mode + ".freq");
+
   } else {
     cerr << "Unknown mode '" << mode << "'. Supported modes: freqstd, freq, freqstdf" << endl;
     return 1;

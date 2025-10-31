@@ -1,0 +1,270 @@
+Starting performance measurements...
+Testing mode: freqstd
+Preparing to parse WarAndPeace.txt (mode=freqstd N=4), containing 3235342 bytes
+Total runtime (wall clock) : 503 ms
+--------------------------------
+Testing mode: freqstdf
+Preparing to parse WarAndPeace.txt (mode=freqstdf N=4), containing 3235342 bytes
+Total runtime (wall clock) : 793 ms
+--------------------------------
+Testing mode: freq
+Preparing to parse WarAndPeace.txt (mode=freq N=4), containing 3235342 bytes
+Total runtime (wall clock) : 830 ms
+--------------------------------
+Testing mode: partition with 1 threads
+Preparing to parse WarAndPeace.txt (mode=partition N=1), containing 3235342 bytes
+Total runtime (wall clock) : 782 ms
+--------------------------------
+Testing mode: partition with 2 threads
+Preparing to parse WarAndPeace.txt (mode=partition N=2), containing 3235342 bytes
+Total runtime (wall clock) : 689 ms
+--------------------------------
+Testing mode: partition with 4 threads
+Preparing to parse WarAndPeace.txt (mode=partition N=4), containing 3235342 bytes
+Total runtime (wall clock) : 840 ms
+--------------------------------
+Testing mode: partition with 6 threads
+Preparing to parse WarAndPeace.txt (mode=partition N=6), containing 3235342 bytes
+Total runtime (wall clock) : 852 ms
+--------------------------------
+Testing mode: partition with 8 threads
+Preparing to parse WarAndPeace.txt (mode=partition N=8), containing 3235342 bytes
+Total runtime (wall clock) : 829 ms
+--------------------------------
+Testing mode: partition with 16 threads
+Preparing to parse WarAndPeace.txt (mode=partition N=16), containing 3235342 bytes
+Total runtime (wall clock) : 693 ms
+--------------------------------
+Testing mode: partition with 32 threads
+Preparing to parse WarAndPeace.txt (mode=partition N=32), containing 3235342 bytes
+Total runtime (wall clock) : 840 ms
+--------------------------------
+Testing mode: partition with 64 threads
+Preparing to parse WarAndPeace.txt (mode=partition N=64), containing 3235342 bytes
+Total runtime (wall clock) : 954 ms
+--------------------------------
+Testing mode: mt_mutex with 1 threads
+Preparing to parse WarAndPeace.txt (mode=mt_mutex N=1), containing 3235342 bytes
+Total runtime (wall clock) : 1079 ms
+--------------------------------
+Testing mode: mt_mutex with 2 threads
+Preparing to parse WarAndPeace.txt (mode=mt_mutex N=2), containing 3235342 bytes
+Total runtime (wall clock) : 872 ms
+--------------------------------
+Testing mode: mt_mutex with 4 threads
+Preparing to parse WarAndPeace.txt (mode=mt_mutex N=4), containing 3235342 bytes
+Total runtime (wall clock) : 1053 ms
+--------------------------------
+Testing mode: mt_mutex with 6 threads
+Preparing to parse WarAndPeace.txt (mode=mt_mutex N=6), containing 3235342 bytes
+Total runtime (wall clock) : 917 ms
+--------------------------------
+Testing mode: mt_mutex with 8 threads
+Preparing to parse WarAndPeace.txt (mode=mt_mutex N=8), containing 3235342 bytes
+Total runtime (wall clock) : 1118 ms
+--------------------------------
+Testing mode: mt_mutex with 16 threads
+Preparing to parse WarAndPeace.txt (mode=mt_mutex N=16), containing 3235342 bytes
+Total runtime (wall clock) : 1169 ms
+--------------------------------
+Testing mode: mt_mutex with 32 threads
+Preparing to parse WarAndPeace.txt (mode=mt_mutex N=32), containing 3235342 bytes
+Total runtime (wall clock) : 1269 ms
+--------------------------------
+Testing mode: mt_mutex with 64 threads
+Preparing to parse WarAndPeace.txt (mode=mt_mutex N=64), containing 3235342 bytes
+Total runtime (wall clock) : 1758 ms
+--------------------------------
+Testing mode: mt_hmutex with 1 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hmutex N=1), containing 3235342 bytes
+Total runtime (wall clock) : 1245 ms
+--------------------------------
+Testing mode: mt_hmutex with 2 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hmutex N=2), containing 3235342 bytes
+Total runtime (wall clock) : 1028 ms
+--------------------------------
+Testing mode: mt_hmutex with 4 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hmutex N=4), containing 3235342 bytes
+Total runtime (wall clock) : 1318 ms
+--------------------------------
+Testing mode: mt_hmutex with 6 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hmutex N=6), containing 3235342 bytes
+Total runtime (wall clock) : 1249 ms
+--------------------------------
+Testing mode: mt_hmutex with 8 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hmutex N=8), containing 3235342 bytes
+Total runtime (wall clock) : 1324 ms
+--------------------------------
+Testing mode: mt_hmutex with 16 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hmutex N=16), containing 3235342 bytes
+Total runtime (wall clock) : 1444 ms
+--------------------------------
+Testing mode: mt_hmutex with 32 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hmutex N=32), containing 3235342 bytes
+Total runtime (wall clock) : 1636 ms
+--------------------------------
+Testing mode: mt_hmutex with 64 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hmutex N=64), containing 3235342 bytes
+Total runtime (wall clock) : 1231 ms
+--------------------------------
+Testing mode: mt_hashes with 1 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hashes N=1), containing 3235342 bytes
+Total runtime (wall clock) : 1277 ms
+--------------------------------
+Testing mode: mt_hashes with 2 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hashes N=2), containing 3235342 bytes
+Total runtime (wall clock) : 1059 ms
+--------------------------------
+Testing mode: mt_hashes with 4 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hashes N=4), containing 3235342 bytes
+Total runtime (wall clock) : 1292 ms
+--------------------------------
+Testing mode: mt_hashes with 6 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hashes N=6), containing 3235342 bytes
+Total runtime (wall clock) : 1301 ms
+--------------------------------
+Testing mode: mt_hashes with 8 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hashes N=8), containing 3235342 bytes
+Total runtime (wall clock) : 1167 ms
+--------------------------------
+Testing mode: mt_hashes with 16 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hashes N=16), containing 3235342 bytes
+Total runtime (wall clock) : 1262 ms
+--------------------------------
+Testing mode: mt_hashes with 32 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hashes N=32), containing 3235342 bytes
+Total runtime (wall clock) : 1454 ms
+--------------------------------
+Testing mode: mt_hashes with 64 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hashes N=64), containing 3235342 bytes
+Total runtime (wall clock) : 1316 ms
+--------------------------------
+Testing mode: mt_hhashes with 1 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hhashes N=1), containing 3235342 bytes
+Total runtime (wall clock) : 1141 ms
+--------------------------------
+Testing mode: mt_hhashes with 2 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hhashes N=2), containing 3235342 bytes
+Total runtime (wall clock) : 990 ms
+--------------------------------
+Testing mode: mt_hhashes with 4 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hhashes N=4), containing 3235342 bytes
+Total runtime (wall clock) : 1185 ms
+--------------------------------
+Testing mode: mt_hhashes with 6 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hhashes N=6), containing 3235342 bytes
+Total runtime (wall clock) : 1232 ms
+--------------------------------
+Testing mode: mt_hhashes with 8 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hhashes N=8), containing 3235342 bytes
+Total runtime (wall clock) : 1165 ms
+--------------------------------
+Testing mode: mt_hhashes with 16 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hhashes N=16), containing 3235342 bytes
+Total runtime (wall clock) : 1263 ms
+--------------------------------
+Testing mode: mt_hhashes with 32 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hhashes N=32), containing 3235342 bytes
+Total runtime (wall clock) : 1184 ms
+--------------------------------
+Testing mode: mt_hhashes with 64 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hhashes N=64), containing 3235342 bytes
+Total runtime (wall clock) : 1470 ms
+--------------------------------
+Testing mode: mt_hfine with 1 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hfine N=1), containing 3235342 bytes
+Total runtime (wall clock) : 1237 ms
+--------------------------------
+Testing mode: mt_hfine with 2 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hfine N=2), containing 3235342 bytes
+Total runtime (wall clock) : 1179 ms
+--------------------------------
+Testing mode: mt_hfine with 4 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hfine N=4), containing 3235342 bytes
+Total runtime (wall clock) : 1169 ms
+--------------------------------
+Testing mode: mt_hfine with 6 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hfine N=6), containing 3235342 bytes
+Total runtime (wall clock) : 1230 ms
+--------------------------------
+Testing mode: mt_hfine with 8 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hfine N=8), containing 3235342 bytes
+Total runtime (wall clock) : 1286 ms
+--------------------------------
+Testing mode: mt_hfine with 16 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hfine N=16), containing 3235342 bytes
+Total runtime (wall clock) : 1188 ms
+--------------------------------
+Testing mode: mt_hfine with 32 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hfine N=32), containing 3235342 bytes
+Total runtime (wall clock) : 1373 ms
+--------------------------------
+Testing mode: mt_hfine with 64 threads
+Preparing to parse WarAndPeace.txt (mode=mt_hfine N=64), containing 3235342 bytes
+Total runtime (wall clock) : 1418 ms
+--------------------------------
+Testing mode: mt_na with 1 threads
+Preparing to parse WarAndPeace.txt (mode=mt_na N=1), containing 3235342 bytes
+Total runtime (wall clock) : 1163 ms
+--------------------------------
+Testing mode: mt_na with 2 threads
+Preparing to parse WarAndPeace.txt (mode=mt_na N=2), containing 3235342 bytes
+Total runtime (wall clock) : 1219 ms
+--------------------------------
+Testing mode: mt_na with 4 threads
+Preparing to parse WarAndPeace.txt (mode=mt_na N=4), containing 3235342 bytes
+Total runtime (wall clock) : 1106 ms
+--------------------------------
+Testing mode: mt_na with 6 threads
+Preparing to parse WarAndPeace.txt (mode=mt_na N=6), containing 3235342 bytes
+Total runtime (wall clock) : 1295 ms
+--------------------------------
+Testing mode: mt_na with 8 threads
+Preparing to parse WarAndPeace.txt (mode=mt_na N=8), containing 3235342 bytes
+Total runtime (wall clock) : 1225 ms
+--------------------------------
+Testing mode: mt_na with 16 threads
+Preparing to parse WarAndPeace.txt (mode=mt_na N=16), containing 3235342 bytes
+Total runtime (wall clock) : 1364 ms
+--------------------------------
+Testing mode: mt_na with 32 threads
+Preparing to parse WarAndPeace.txt (mode=mt_na N=32), containing 3235342 bytes
+Total runtime (wall clock) : 1432 ms
+--------------------------------
+Testing mode: mt_na with 64 threads
+Preparing to parse WarAndPeace.txt (mode=mt_na N=64), containing 3235342 bytes
+Total runtime (wall clock) : 1199 ms
+--------------------------------
+Testing mode: mt_lfna with 1 threads
+Preparing to parse WarAndPeace.txt (mode=mt_lfna N=1), containing 3235342 bytes
+Total runtime (wall clock) : 1188 ms
+--------------------------------
+Testing mode: mt_lfna with 2 threads
+Preparing to parse WarAndPeace.txt (mode=mt_lfna N=2), containing 3235342 bytes
+Total runtime (wall clock) : 933 ms
+--------------------------------
+Testing mode: mt_lfna with 4 threads
+Preparing to parse WarAndPeace.txt (mode=mt_lfna N=4), containing 3235342 bytes
+Total runtime (wall clock) : 1230 ms
+--------------------------------
+Testing mode: mt_lfna with 6 threads
+Preparing to parse WarAndPeace.txt (mode=mt_lfna N=6), containing 3235342 bytes
+Total runtime (wall clock) : 1071 ms
+--------------------------------
+Testing mode: mt_lfna with 8 threads
+Preparing to parse WarAndPeace.txt (mode=mt_lfna N=8), containing 3235342 bytes
+Total runtime (wall clock) : 1211 ms
+--------------------------------
+Testing mode: mt_lfna with 16 threads
+Preparing to parse WarAndPeace.txt (mode=mt_lfna N=16), containing 3235342 bytes
+Total runtime (wall clock) : 1257 ms
+--------------------------------
+Testing mode: mt_lfna with 32 threads
+Preparing to parse WarAndPeace.txt (mode=mt_lfna N=32), containing 3235342 bytes
+Total runtime (wall clock) : 1111 ms
+--------------------------------
+Testing mode: mt_lfna with 64 threads
+Preparing to parse WarAndPeace.txt (mode=mt_lfna N=64), containing 3235342 bytes
+Total runtime (wall clock) : 1238 ms
+--------------------------------
+All tests completed.
